@@ -27,6 +27,7 @@ cd ${WORKDIR}
 cd $WORKDIR
 mkdir -p output/
 mkdir -p data/
+mkdir -p obj/
 scp -r lxplus.cern.ch:/afs/cern.ch/work/m/mkhader/public/output_clusters_vertices_tracks*.root data/.
 
 make clean
