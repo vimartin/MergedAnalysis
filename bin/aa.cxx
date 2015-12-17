@@ -1538,6 +1538,31 @@ void aa::Init(TTree *tree) {
 		mc_status_branch = tree->GetBranch("mc_status");
 		if (mc_status_branch) {mc_status_branch->SetAddress(&mc_status_);}
 	}
+	status1_mc_pt_branch = 0;
+	if (tree->GetBranch("status1_mc_pt") != 0) {
+		status1_mc_pt_branch = tree->GetBranch("status1_mc_pt");
+		if (status1_mc_pt_branch) {status1_mc_pt_branch->SetAddress(&status1_mc_pt_);}
+	}
+	status1_mc_eta_branch = 0;
+	if (tree->GetBranch("status1_mc_eta") != 0) {
+		status1_mc_eta_branch = tree->GetBranch("status1_mc_eta");
+		if (status1_mc_eta_branch) {status1_mc_eta_branch->SetAddress(&status1_mc_eta_);}
+	}
+	status1_mc_phi_branch = 0;
+	if (tree->GetBranch("status1_mc_phi") != 0) {
+		status1_mc_phi_branch = tree->GetBranch("status1_mc_phi");
+		if (status1_mc_phi_branch) {status1_mc_phi_branch->SetAddress(&status1_mc_phi_);}
+	}
+	status1_mc_e_branch = 0;
+	if (tree->GetBranch("status1_mc_e") != 0) {
+		status1_mc_e_branch = tree->GetBranch("status1_mc_e");
+		if (status1_mc_e_branch) {status1_mc_e_branch->SetAddress(&status1_mc_e_);}
+	}
+	status1_mc_pdgId_branch = 0;
+	if (tree->GetBranch("status1_mc_pdgId") != 0) {
+		status1_mc_pdgId_branch = tree->GetBranch("status1_mc_pdgId");
+		if (status1_mc_pdgId_branch) {status1_mc_pdgId_branch->SetAddress(&status1_mc_pdgId_);}
+	}
   tree->SetMakeClass(0);
 }
 void aa::GetEntry(unsigned int idx) 
@@ -1851,6 +1876,11 @@ void aa::GetEntry(unsigned int idx)
 		mc_e_isLoaded = false;
 		mc_pdgId_isLoaded = false;
 		mc_status_isLoaded = false;
+		status1_mc_pt_isLoaded = false;
+		status1_mc_eta_isLoaded = false;
+		status1_mc_phi_isLoaded = false;
+		status1_mc_e_isLoaded = false;
+		status1_mc_pdgId_isLoaded = false;
 	}
 
 void aa::LoadAllBranches() 
@@ -2163,6 +2193,11 @@ void aa::LoadAllBranches()
 	if (mc_e_branch != 0) mc_e();
 	if (mc_pdgId_branch != 0) mc_pdgId();
 	if (mc_status_branch != 0) mc_status();
+	if (status1_mc_pt_branch != 0) status1_mc_pt();
+	if (status1_mc_eta_branch != 0) status1_mc_eta();
+	if (status1_mc_phi_branch != 0) status1_mc_phi();
+	if (status1_mc_e_branch != 0) status1_mc_e();
+	if (status1_mc_pdgId_branch != 0) status1_mc_pdgId();
 }
 
 	const float &aa::weight_mc()
@@ -6157,6 +6192,77 @@ void aa::LoadAllBranches()
 		return *mc_status_;
 	}
 
+
+
+
+	const vector<float> &aa::status1_mc_pt()
+	{
+		if (not status1_mc_pt_isLoaded) {
+			if (status1_mc_pt_branch != 0) {
+				status1_mc_pt_branch->GetEntry(index);
+			} else { 
+				printf("branch status1_mc_pt_branch does not exist!\n");
+				exit(1);
+			}
+			status1_mc_pt_isLoaded = true;
+		}
+		return *status1_mc_pt_;
+	}
+	const vector<float> &aa::status1_mc_eta()
+	{
+		if (not status1_mc_eta_isLoaded) {
+			if (status1_mc_eta_branch != 0) {
+				status1_mc_eta_branch->GetEntry(index);
+			} else { 
+				printf("branch status1_mc_eta_branch does not exist!\n");
+				exit(1);
+			}
+			status1_mc_eta_isLoaded = true;
+		}
+		return *status1_mc_eta_;
+	}
+	const vector<float> &aa::status1_mc_phi()
+	{
+		if (not status1_mc_phi_isLoaded) {
+			if (status1_mc_phi_branch != 0) {
+				status1_mc_phi_branch->GetEntry(index);
+			} else { 
+				printf("branch status1_mc_phi_branch does not exist!\n");
+				exit(1);
+			}
+			status1_mc_phi_isLoaded = true;
+		}
+		return *status1_mc_phi_;
+	}
+	const vector<float> &aa::status1_mc_e()
+	{
+		if (not status1_mc_e_isLoaded) {
+			if (status1_mc_e_branch != 0) {
+				status1_mc_e_branch->GetEntry(index);
+			} else { 
+				printf("branch status1_mc_e_branch does not exist!\n");
+				exit(1);
+			}
+			status1_mc_e_isLoaded = true;
+		}
+		return *status1_mc_e_;
+	}
+	const vector<int> &aa::status1_mc_pdgId()
+	{
+		if (not status1_mc_pdgId_isLoaded) {
+			if (status1_mc_pdgId_branch != 0) {
+				status1_mc_pdgId_branch->GetEntry(index);
+			} else { 
+				printf("branch status1_mc_pdgId_branch does not exist!\n");
+				exit(1);
+			}
+			status1_mc_pdgId_isLoaded = true;
+		}
+		return *status1_mc_pdgId_;
+	}
+
+
+
   void aa::progress( int nEventsTotal, int nEventsChain ){
     int period = 1000;
     if(nEventsTotal%1000 == 0) {
@@ -6485,4 +6591,9 @@ namespace tas {
 	const vector<float> &mc_e() { return events.mc_e(); }
 	const vector<int> &mc_pdgId() { return events.mc_pdgId(); }
 	const vector<int> &mc_status() { return events.mc_status(); }
+	const vector<float> &status1_mc_pt() { return events.status1_mc_pt(); }
+	const vector<float> &status1_mc_eta() { return events.status1_mc_eta(); }
+	const vector<float> &status1_mc_phi() { return events.status1_mc_phi(); }
+	const vector<float> &status1_mc_e() { return events.status1_mc_e(); }
+	const vector<int> &status1_mc_pdgId() { return events.status1_mc_pdgId(); }
 }
