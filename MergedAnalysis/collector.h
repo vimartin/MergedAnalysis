@@ -12,6 +12,8 @@ using namespace fastjet;
 
 vector<PseudoJet> GetCaloPseudoJets();
 vector<PseudoJet> GetTrkPseudoJets();
+vector<PseudoJet> GetGenTrackJets();
+vector<PseudoJet> GetGenCaloJets();
 vector<PseudoJet> JetTrackAssociator(const PseudoJet& jet, const float& R);
 
 float getJVF(const PseudoJet& jet, const float& R);
@@ -21,5 +23,7 @@ bool isGoodTrack(int trkidx);
 bool isBhadron(int pdgId);
 bool isBparton(int pdgId, int status);
 bool isLepton(const PseudoJet& jet, const float& R);
+bool isNeutral(int pdgId);
+bool isInvisible(int pdgId);
 
 #endif

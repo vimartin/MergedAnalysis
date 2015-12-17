@@ -942,6 +942,21 @@ protected:
 	vector<int> *mc_status_;
 	TBranch *mc_status_branch;
 	bool mc_status_isLoaded;
+  	vector<float> *status1_mc_pt_;
+	TBranch *status1_mc_pt_branch;
+	bool status1_mc_pt_isLoaded;
+	vector<float> *status1_mc_eta_;
+	TBranch *status1_mc_eta_branch;
+	bool status1_mc_eta_isLoaded;
+	vector<float> *status1_mc_phi_;
+	TBranch *status1_mc_phi_branch;
+	bool status1_mc_phi_isLoaded;
+	vector<float> *status1_mc_e_;
+	TBranch *status1_mc_e_branch;
+	bool status1_mc_e_isLoaded;
+	vector<int> *status1_mc_pdgId_;
+	TBranch *status1_mc_pdgId_branch;
+	bool status1_mc_pdgId_isLoaded;
 public: 
 void Init(TTree *tree);
 void GetEntry(unsigned int idx); 
@@ -1253,6 +1268,11 @@ void LoadAllBranches();
 	const vector<float> &mc_e();
 	const vector<int> &mc_pdgId();
 	const vector<int> &mc_status();
+  	const vector<float> &status1_mc_pt();
+	const vector<float> &status1_mc_eta();
+	const vector<float> &status1_mc_phi();
+	const vector<float> &status1_mc_e();
+	const vector<int> &status1_mc_pdgId();
 
   static void progress( int nEventsTotal, int nEventsChain );
 };
@@ -1569,5 +1589,10 @@ namespace tas {
 	const vector<float> &mc_e();
 	const vector<int> &mc_pdgId();
 	const vector<int> &mc_status();
+	const vector<float> &status1_mc_pt();
+	const vector<float> &status1_mc_eta();
+	const vector<float> &status1_mc_phi();
+	const vector<float> &status1_mc_e();
+	const vector<int> &status1_mc_pdgId();
 }
 #endif
